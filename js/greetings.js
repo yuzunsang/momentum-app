@@ -10,25 +10,25 @@ const USERNAME_KEY = "username";
 // 로그인 버튼 submit 시
 function onLoginSubmit(event) {
   event.preventDefault();
-  const userName = loginInput.value;
+  const username = loginInput.value;
 
-  localStorage.setItem(USERNAME_KEY, userName);
+  localStorage.setItem(USERNAME_KEY, username);
 
-  WelcomeUser();
+  paintGreetings(username);
 }
 
 // login창 없애기 + welcome창 보여주기
-function WelcomeUser() {
+function paintGreetings(username) {
   loginForm.classList.add(HIDDEN_CLASSNAME);
   greeting.classList.remove(HIDDEN_CLASSNAME);
-  greeting.innerText = `Hello, ${userName}!`;
+  greeting.innerText = `Hello, ${username}!`;
 }
 
 // localStorage의 key에 저장할 value의 변수를 선언
 const savedUsername = localStorage.getItem(USERNAME_KEY);
 
 // 어떤 창을 보여줄 지
-if (savedUsername) WelcomeUser();
+if (savedUsername) paintGreetings(savedUsername);
 else {
   loginForm.addEventListener("submit", onLoginSubmit);
 }
